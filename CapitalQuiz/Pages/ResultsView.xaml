@@ -1,0 +1,81 @@
+<!-- 
+ * Program Author: Aabriti Shrestha
+ * USM ID: w10171497
+ * Assignment: Capital Quiz (Part 3)
+ * 
+ * Description: This is the main layout for result page UI where final score, message and incorrect states are
+    displayed along with the option for new game or exit game.
+/-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="CapitalQuiz.Pages.ResultsView"
+            Title="ResultsView">
+<Grid RowDefinitions="Auto,Auto,Auto,*,Auto" BackgroundColor="Black">
+    <!-- row 1: result title-->
+    <Grid Grid.Row="0">
+        <Label Text="Result" FontSize="45" TextColor="White" HorizontalOptions="Center" Padding="0, 20, 0, 10"/>
+    </Grid>
+
+    <!-- row 2: Final Score -->
+    <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
+        <!-- Points Earned -->
+        <Label Text="{Binding Score}" FontSize="45" TextColor="White" BackgroundColor="#333333" 
+                HeightRequest="60" WidthRequest="60"
+                HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+        <!-- "of" Label -->
+        <Label Text="of" FontSize="45" TextColor="White" Padding="10,0,10,0"/>
+
+        <!-- Total Number of Questions -->
+        <Label Text="{Binding TotalQuestions}" FontSize="45" TextColor="White" BackgroundColor="#333333"
+                WidthRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+    </StackLayout>
+
+
+    <!-- row 3: Congrats Message and Image -->
+    <Grid Grid.Row="2" HorizontalOptions="Center"
+            RowDefinitions="Auto,Auto">
+        <!-- Congrats Message -->
+        <Label x:Name="resultMessage" FontSize="25" 
+                TextColor="White" Padding="0,40,0,0"
+                HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <!-- Image -->
+        <Image Grid.Row="1" x:Name="winnerImage" Source="https://images.kerrangcdn.com/KERRANG_MURICA_2400x1350.jpg?auto=compress&amp;fit=crop&amp;w=4800&amp;h=2700" 
+            WidthRequest="400" HeightRequest="300" Margin="0,20,0,0"
+            HorizontalOptions="Center" VerticalOptions="Center" />
+    </Grid>
+
+    <!--row 4: List of States-->
+    <ScrollView Grid.Row="3">
+        <CollectionView x:Name="collMissedStates"
+                        ItemsSource="{Binding MissedStateViews}"
+                        VerticalScrollBarVisibility="Always">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Label Text="{Binding Text}" Padding="25" FontSize="25"
+                                BackgroundColor="#333333" TextColor="White"
+                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="5"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+
+    <!-- row 5: New Game/Exit Buttons -->
+    <Grid Grid.Row="4">
+        <StackLayout Orientation="Horizontal" 
+                        VerticalOptions="End" 
+                        HorizontalOptions="Center">
+            <Button Text="New Game" FontSize="35" WidthRequest="250" Clicked="NewGameButton_Clicked"/>
+            <BoxView WidthRequest="20" />
+            <Button Text="Exit" FontSize="35" WidthRequest="250" Clicked="ExitButton_Clicked"/>
+        </StackLayout>
+    </Grid>
+
+</Grid>
+</ContentPage>

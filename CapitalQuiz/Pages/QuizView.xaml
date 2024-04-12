@@ -1,0 +1,81 @@
+<!-- 
+ * Program Author: Aabriti Shrestha
+ * USM ID: w10171497
+ * Assignment: Capital Quiz (Part 3)
+ * 
+ * Description: This is the main UI layout for the quiz interface and features elements like quiz title, 
+    quiz question, discplaying options, scores, and results.
+ -->
+   <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CapitalQuiz.Pages.QuizView"
+             Title="QuizView">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"  BackgroundColor="Black" >
+
+        <!-- Title -->
+        <Grid Grid.Row="1" Margin="0,20,0,0" BackgroundColor="#555555">
+            <Label Text="Capital Quiz" FontSize="55" TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+        </Grid>
+
+        <!-- Score -->
+        <Grid Grid.Row="2"  Padding="0,10,0,40" RowDefinitions="Auto" ColumnDefinitions="Auto,100">
+            <Label Grid.Column="0" Text="Score: " Padding="20, 10, 10, 10" TextColor="White" FontSize="20"/>
+            <Label Grid.Column="1" Text="{Binding Score, StringFormat= '{0} / 20'}" HorizontalTextAlignment="Center" 
+                   x:Name="scoreLabel" VerticalTextAlignment="Center" TextColor="White" BackgroundColor="#333333" 
+                   WidthRequest="80" HeightRequest="30" FontSize="20"/>
+        </Grid>
+
+
+        <!-- Question and Options -->
+        <Grid HorizontalOptions="Center" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Margin="0,10,0,40" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="lblQuestion" Text="What is the capital of" TextColor="White" HorizontalTextAlignment="Center" FontSize="20" />
+
+            <RadioButton Grid.Row="1" Grid.Column="0" WidthRequest="250" TextColor="White" x:Name="rbOption1" Content="Trenton" BackgroundColor="#444444" />
+            <RadioButton Grid.Row="1" Grid.Column="1" WidthRequest="250" TextColor="White" x:Name="rbOption2" Content="Albany" BackgroundColor="#444444" />
+            <RadioButton Grid.Row="2" Grid.Column="0" WidthRequest="250" TextColor="White" x:Name="rbOption3" Content="Buffalo" BackgroundColor="#444444" />
+            <RadioButton Grid.Row="2" Grid.Column="1" WidthRequest="250" TextColor="White" x:Name="rbOption4" Content="New York City" BackgroundColor="#444444" />
+
+        </Grid>
+
+        <!-- Submit and Next Buttons -->
+        <Grid Grid.Row="4" Margin="0,40,0,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button x:Name="submitButton" Text="Submit" FontSize="25" WidthRequest="150" TextColor="Black" Clicked="SubmitButton_Clicked" />
+                <Button x:Name="nextButton" Text="Next" FontSize="25" WidthRequest="150" TextColor="Black" Clicked="NextButton_Clicked" IsVisible="False" />
+            </StackLayout>
+        </Grid>
+
+        <!-- Result -->
+        <Grid Grid.Row="5" Padding="0,10,0,0" HeightRequest="100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <!-- Correct/Incorrect Word -->
+                <Label x:Name="lblQuestionResult" FontSize="45" TextColor="White"  HorizontalTextAlignment="Center" VerticalOptions="Center" IsVisible="False"/>
+
+                <!-- Correct/Incorrect Icon -->
+                <Image Source="icon_correct.png" x:Name="imgCorrect" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" HeightRequest="45"/>
+                <Image Source="icon_incorrect.png" x:Name="imgIncorrect" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" HeightRequest="45"/>
+            </StackLayout>
+        </Grid>
+
+        <!-- Quit Button -->
+        <Grid Grid.Row="7" >
+            <Button Text="Quit" VerticalOptions="End" HorizontalOptions="End" TextColor="Black" FontSize="25" WidthRequest="200" HeightRequest="50" Clicked="QuitButton_Clicked" />
+        </Grid>
+    </Grid>
+</ContentPage>
